@@ -1,0 +1,83 @@
+C++_day05
+2021/10/28
+
+1.文件操作
+
+	* 相关头文件：<fstream>
+
+	* 文件分类
+
+		—— 文本文件：文件以文本的ASCII码形式存储在计算机中
+
+		—— 二进制文件：文件以文本的二进制形式存储在计算机中【一般读不懂】
+
+	* 文件三大类
+
+		—— 写操作：ofstream
+
+		—— 读操作：ifstream
+
+		—— 读写操作：fstream
+
+	* 写的相关操作
+
+		—— 包含头文件【#include <fstream>】
+
+		—— 创建文件流对象【ofstream ofs;】
+
+		—— 打开文件【ofs.open("文件路径",打开方式);】【默认路径为cpp文件同级目录】
+
+		—— 写数据【ofs<<"数据";】
+
+		—— 关闭文件【ofs.close();】
+
+	* 读的相关操作
+
+		—— 包含头文件【#include <fstream>】
+
+		—— 创建文件流对象【ifstream ifs;】
+
+		—— 打开文件并判断文件是否打开成功【ifs.open("文件路径",打开方式);if(!ifs.is_open()){cout<<"打开失败"<<endl;return;}】
+
+		—— 读数据
+
+			*	char buf[1024] = {0} ;
+				while(ifs >> buf){
+					cout<<buf<<endl ;
+				}
+
+			*	char buf[1024] = {0} ;
+				while(ifs.getline(buf,sizeof(buf))){
+					cout<<buf<<endl ;
+				}
+
+			*	string buf ;
+				while(getline(ifs,buf)){
+					cout<<buf<<endl ;
+				}
+
+			*	【不推荐，效率过低】
+				char ch ;
+				while((ch = ifs.get()) != EOF){//EOF - end of file
+					cout<<buf<<endl ;
+				}
+
+		—— 关闭文件【ifs.close();】
+
+	* 打开方式
+
+		—— ios::in	为读文件而打开文件
+
+		—— ios::out	为写文件而打开文件
+
+		—— ios::ate	初始位置：文件尾
+
+		—— ios::app	以追加方式写文件
+
+		—— ios::trunc	如果文件存在先删除，再创建
+
+		—— ios::binary	二进制方式
+
+		—— 可以搭配使用【通过|操作符】【用二进制方式写文件：ios::binary|ios::out】
+
+	
